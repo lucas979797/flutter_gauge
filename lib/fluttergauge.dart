@@ -9,6 +9,7 @@ import 'flutter_gauge.dart';
 import 'gaugetextpainter.dart';
 
 class FlutterGaugeMain extends StatefulWidget {
+  final double value;
   final int start;
   final int end;
   final double highlightStart;
@@ -37,6 +38,7 @@ class FlutterGaugeMain extends StatefulWidget {
   final bool isDecimal;
 
   FlutterGaugeMain({
+    required this.value,
     required this.isDecimal,
     required this.inactiveColor,
     required this.activeColor,
@@ -75,15 +77,8 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
   int end;
   double highlightStart;
   double highlightEnd;
-  double val = 0.0;
-  double newVal = 0.0;
-  late AnimationController percentageAnimationController;
 
-  @override
-  void dispose() {
-    percentageAnimationController.dispose();
-    super.dispose();
-  }
+  double newVal = 0.0;
 
   _FlutterGaugeMainState(
       this.start, this.end, this.highlightStart, this.highlightEnd) {
@@ -91,21 +86,6 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
     this.end = end;
     this.highlightStart = highlightStart;
     this.highlightEnd = highlightEnd;
-
-    percentageAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 1000))
-      ..addListener(() {
-        setState(() {
-          val =
-              lerpDouble(val, newVal, percentageAnimationController.value) ?? 0;
-        });
-      });
-  }
-
-  reloadData(double value) {
-    print(value);
-    newVal = value;
-    percentageAnimationController.forward(from: 0.0);
   }
 
   @override
@@ -136,7 +116,7 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
                             startPercent: this.widget.highlightStart,
                             endPercent: this.widget.highlightEnd,
                             width: this.widget.widthCircle,
-                            value: this.val)),
+                            value: widget.value)),
                   )
                 : SizedBox(),
             widget.hand == Hand.none || widget.hand == Hand.short
@@ -172,7 +152,7 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
                       activeColor: widget.activeColor,
                       start: this.start,
                       end: this.end,
-                      value: this.val,
+                      value: widget.value,
                       fontFamily: widget.fontFamily,
 //                              color: this.widget.colorHourHand,
                       widthCircle: widget.widthCircle,
@@ -190,7 +170,7 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
                       painter: new HandPainter(
                           shadowHand: widget.shadowHand,
                           hand: widget.hand,
-                          value: val,
+                          value: widget.value,
                           start: this.start,
                           end: this.end,
                           color: this.widget.handColor,
@@ -207,7 +187,7 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
                           width: widget.widthCircle,
                           counterAlign: widget.counterAlign,
                           end: this.end,
-                          value: this.val,
+                          value: widget.value,
                           fontFamily: widget.fontFamily,
                           textStyle: effectiveCounterStyle),
                     )

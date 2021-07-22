@@ -24,6 +24,7 @@ enum CounterAlign {
 enum Hand { none, long, short }
 
 class FlutterGauge extends StatelessWidget {
+  final double currentValue;
   final int start;
   final int end;
   final String fontFamily;
@@ -48,6 +49,7 @@ class FlutterGauge extends StatelessWidget {
   final TextStyle? textStyle;
 
   FlutterGauge({
+    this.currentValue = 0.0,
     this.isDecimal = true,
     this.inactiveColor = Colors.black,
     this.activeColor = Colors.red,
@@ -63,7 +65,7 @@ class FlutterGauge extends StatelessWidget {
     this.counterAlign = CounterAlign.bottom,
     this.number = Number.all,
     this.isCircle = true,
-    this.hand = Hand.long,
+    this.hand = Hand.none,
     this.secondsMarker = SecondsMarker.all,
     this.handSize = 30,
     this.start = 0,
@@ -79,6 +81,7 @@ class FlutterGauge extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         FlutterGaugeMain(
+          value: currentValue,
           isDecimal: isDecimal,
           counterStyle: counterStyle,
           textStyle: textStyle,
