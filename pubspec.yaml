@@ -5,12 +5,11 @@ author: alitorki2651@gmail.com
 homepage: https://github.com/alitorki2651/flutter_gauge
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  rxdart: '>=0.18.1'
 
 dev_dependencies:
   flutter_test:
