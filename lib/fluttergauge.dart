@@ -135,14 +135,14 @@ class _FlutterGaugeMainState extends State<FlutterGaugeMain>
                 height: constraints.maxWidth,
                 width: constraints.maxWidth,
 //                      alignment: Alignment.center,
-                padding: EdgeInsets.only(
-                  top: widget.hand == Hand.short
-                      ? widget.widthCircle
-                      : widget.widthCircle,
-                  bottom: widget.widthCircle,
-                  right: widget.widthCircle,
-                  left: widget.widthCircle,
-                ),
+                // padding: EdgeInsets.only(
+                //   top: widget.hand == Hand.short
+                //       ? widget.widthCircle
+                //       : widget.widthCircle,
+                //   bottom: widget.widthCircle,
+                //   right: widget.widthCircle,
+                //   left: widget.widthCircle,
+                // ),
                 child: new CustomPaint(
                   painter: new GaugeTextPainter(
                       numberInAndOut: widget.numberInAndOut,

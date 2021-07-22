@@ -71,7 +71,7 @@ class FlutterGauge extends StatelessWidget {
     this.start = 0,
     this.end = 100,
     this.fontFamily = "",
-    this.widthCircle = 20,
+    this.widthCircle = 0,
   });
 
   @override
